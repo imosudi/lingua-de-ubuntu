@@ -30,6 +30,17 @@ chmod +x setup.sh
 ./setup.sh
 ```
 
-👨🏽‍💻 Author Isiaka Olukayode Mosudi
-📍 Vienna, Austria
-🌐 LinkedIn
+Resources:
+https://ankiweb.net/shared/decks?search=german&sort=audio
+
+
+
+## 👨🏽‍💻 Author
+👨🏽‍💻 Author Isiaka O. Mosudi
+📍 Vienna, Austria  
+🌐 [LinkedIn](https://www.linkedin.com/in/isiaka-mosudi/)  
+📧 imosudi@outlook.com  
+
+---
+
+### ⭐ If you find this project helpful, consider starring the repo to support more open educational tools!
