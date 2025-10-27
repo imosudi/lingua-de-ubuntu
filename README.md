@@ -30,8 +30,6 @@ chmod +x setup.sh
 ./setup.sh
 ```
 
-👨🏽‍💻 Author
-
-Isiaka Olukayode Mosudi
+👨🏽‍💻 Author Isiaka Olukayode Mosudi
 📍 Vienna, Austria
 🌐 LinkedIn
