@@ -37,6 +37,7 @@ https://ankiweb.net/shared/decks?search=german&sort=audio
 
 ## 👨🏽‍💻 Author
 👨🏽‍💻 Author Isiaka O. Mosudi
+
 📍 Vienna, Austria  
 🌐 [LinkedIn](https://www.linkedin.com/in/isiaka-mosudi/)  
 📧 imosudi@outlook.com  
