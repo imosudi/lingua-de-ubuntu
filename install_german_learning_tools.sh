@@ -1,74 +1,84 @@
 #!/usr/bin/env bash
-# =========================================================
-#  German Learning Environment Setup for Ubuntu 24.04
-#  Author: Isiaka Mosudi
-#  Description: Installs open-source tools to accelerate
-#  German language learning on Ubuntu.
-# =========================================================
+# ============================================================
+#  Lingua-de-Ubuntu: German Learning Environment Setup Script
+#  Author: Isiaka Olukayode Mosudi
+#  License: BSD-3-Clause
+#  Compatible with: Ubuntu 24.04 LTS
+# ============================================================
 
-set -e  # Stop on first error
+set -e
 
-echo "=============================================="
-echo "🧠 Setting up German Learning Environment..."
-echo "=============================================="
+echo "🚀 Starting Lingua-de-Ubuntu setup..."
 
-# ---- Update system ----
-sudo apt update -y && sudo apt upgrade -y
+# ------------------------------
+# Update system and essentials
+# ------------------------------
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y curl wget git python3 python3-pip build-essential unzip
 
-# ---- Install core learning tools ----
-echo "📚 Installing Anki (flashcard system)..."
+# ------------------------------
+# Install Anki (Flashcard Tool)
+# ------------------------------
+echo "📘 Installing Anki..."
 sudo apt install -y anki
 
-echo "📖 Installing GoldenDict (dictionary frontend)..."
+# ------------------------------
+# Install GoldenDict (Dictionary Frontend)
+# ------------------------------
+echo "📖 Installing GoldenDict..."
 sudo apt install -y goldendict
+mkdir -p ~/Dictionaries
 
-echo "🗣️ Installing eSpeak NG (German TTS engine)..."
-sudo apt install -y espeak-ng
+# ------------------------------
+# Install LanguageTool (Grammar & Spell Checker)
+# ------------------------------
+echo "📝 Installing LanguageTool..."
+sudo apt install -y default-jre
+mkdir -p ~/LanguageTool && cd ~/LanguageTool
+LT_VERSION="6.5"
+wget -q "https://languagetool.org/download/LanguageTool-${LT_VERSION}.zip" -O LT.zip
+unzip -o LT.zip && rm LT.zip
+cd ~
 
-echo "✅ Installing LanguageTool (grammar checker)..."
-sudo snap install languagetool
+# ------------------------------
+# Install eSpeak (Text-to-Speech)
+# ------------------------------
+echo "🗣️ Installing eSpeak..."
+sudo apt install -y espeak
 
-# ---- Optional: Add stardict dictionaries for GoldenDict ----
-echo "📦 Installing Stardict German-English dictionaries..."
-sudo apt install -y stardict-english-german stardict-german-english || echo "⚠️ Some Stardict dictionaries may not be in Ubuntu 24.04 repos."
+# ------------------------------
+# Install Forvo Downloader (Pronunciation Audio Fetcher)
+# ------------------------------
+echo "🔊 Installing Forvo Downloader..."
+pip install --upgrade pip
+pip install forvo-downloader
 
-# ---- Install supporting tools ----
-echo "🌐 Installing wget, curl, git for future downloads..."
-sudo apt install -y wget curl git
+# Create a helper alias for easy access
+echo "alias forvo='python3 -m forvo_downloader.cli'" >> ~/.bashrc
+source ~/.bashrc
 
-# ---- Optional: Tatoeba CLI for sentence practice ----
-echo "💬 Installing Tatoeba CLI (via Python)..."
-sudo apt install -y python3-pip
-pip install tatoeba-cli --break-system-packages || pip install tatoeba-cli --user
+# ------------------------------
+# Optional: Audio player for listening practice
+# ------------------------------
+sudo apt install -y vlc
 
-# ---- Optional: Lingva Translate (frontend for Google Translate) ----
-echo "🌍 Installing Lingva Translate via Docker (optional)..."
-if command -v docker &> /dev/null
-then
-    read -p "Do you want to deploy Lingva Translate locally? (y/n): " yn
-    case $yn in
-        [Yy]* ) docker run -d -p 5000:3000 thedaviddelta/lingva-translate;;
-        * ) echo "Skipping Lingva Translate setup.";;
-    esac
-else
-    echo "⚠️ Docker not found. Skipping Lingva Translate."
-fi
-
-# ---- Final notes ----
+# ------------------------------
+# Summary
+# ------------------------------
+echo "✅ Lingua-de-Ubuntu setup complete!"
 echo ""
-echo "🎉 Installation complete!"
-echo "Tools installed:"
-echo "  - Anki (Spaced Repetition)"
-echo "  - GoldenDict (Dictionary with Stardict support)"
-echo "  - eSpeak NG (German text-to-speech)"
-echo "  - LanguageTool (Grammar checking)"
-echo "  - Tatoeba CLI (Sentence examples)"
+echo "📦 Installed tools:"
+echo " - Anki (Flashcards)"
+echo " - GoldenDict (Multilingual Dictionary)"
+echo " - LanguageTool (Grammar & Spell Checker)"
+echo " - eSpeak (Text-to-Speech)"
+echo " - Forvo Downloader (Pronunciation Fetcher)"
 echo ""
 echo "💡 Tips:"
-echo "  - Launch Anki and add a 'German Frequency Deck'."
-echo "  - Open GoldenDict → Edit → Dictionaries → Add sources (e.g., /usr/share/stardict)."
-echo "  - Test eSpeak with: espeak-ng -v de 'Guten Morgen, wie geht es dir?'"
-echo "  - Run LanguageTool locally: languagetool"
+echo " - Run 'anki' to start creating decks."
+echo " - Launch 'goldendict' and add dictionaries in ~/Dictionaries."
+echo " - Use 'java -jar ~/LanguageTool/LanguageTool-6.5/languagetool.jar' for grammar checking."
+echo " - Run 'forvo --help' to fetch German pronunciations by keyword."
 echo ""
-echo "✅ All set. Viel Erfolg beim Deutschlernen!"
+echo "🎯 Viel Erfolg beim Deutschlernen!"
 echo "=============================================="
